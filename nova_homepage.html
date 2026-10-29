@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080a18">
+<title>Nova — A Space to Imagine</title>
+<style>
+:root{--bg:#080a18;--text:#f5f6ff;--muted:#a8accb;--line:#ffffff20;--glass:#ffffff0b;--accent:#9c8cff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:-3;pointer-events:none}
+.aurora{position:fixed;z-index:-2;inset:-20%;pointer-events:none;background:radial-gradient(ellipse at 20% 25%,#7047ff3a,transparent 34%),radial-gradient(ellipse at 78% 44%,#00c9ff22,transparent 32%),radial-gradient(ellipse at 52% 85%,#ec4fff1c,transparent 36%);filter:blur(24px);animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(3%,-2%,0) scale(1.08);filter:blur(34px)}}
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 28px));z-index:10;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid var(--line);border-radius:18px;background:#0b0d20b8;backdrop-filter:blur(18px)}
+.logo{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.08em}
+.logo-mark{width:27px;height:27px;border-radius:9px;background:conic-gradient(from 30deg,#6be9ff,#a18aff,#f58aff,#6be9ff);box-shadow:0 0 24px #a18aff80}
+.links{display:flex;gap:24px;color:var(--muted);font-size:13px}
+.links a:hover{color:white}
+.menu{display:none;background:none;border:1px solid var(--line);color:white;border-radius:10px;padding:8px 10px}
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:130px 22px 70px;position:relative;isolation:isolate}
+.hero-inner{max-width:900px;transform:translateY(var(--shift,0px));transition:transform .12s linear}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:#ffffff08;color:#d6d8f5;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.pulse{width:7px;height:7px;border-radius:50%;background:#75f5d1;box-shadow:0 0 14px #75f5d1;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.4;transform:scale(.7)}}
+h1{font-size:clamp(3rem,9vw,7.5rem);line-height:.94;letter-spacing:-.075em;margin:28px 0 22px;font-weight:850}
+.gradient{background:linear-gradient(100deg,#fff 5%,#bcb2ff 42%,#77eaff 75%,#f3b5ff);background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:clamp(15px,2vw,19px);line-height:1.75;max-width:620px;margin:0 auto}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{border:1px solid var(--line);border-radius:13px;padding:13px 19px;font-weight:700;font-size:14px;transition:transform .2s,box-shadow .2s,background .2s;display:inline-flex;align-items:center;gap:9px}
+.btn:hover{transform:translateY(-3px)}
+.primary{background:linear-gradient(110deg,#8c7bff,#55d9ed);color:#080a18;border:0;box-shadow:0 8px 35px #8c7bff35}
+.secondary{background:#ffffff08}
+.orbit-wrap{height:210px;position:relative;display:grid;place-items:center;margin:10px auto 0;max-width:500px;perspective:800px}
+.planet{width:116px;height:116px;border-radius:50%;position:relative;background:radial-gradient(circle at 30% 25%,#fff 0,#b6a5ff 8%,#6c5be0 27%,#171e55 60%,#080a18 78%);box-shadow:inset -17px -10px 26px #020414,0 0 50px #8270ff52,0 0 110px #6f4aff26;animation:float 5s ease-in-out infinite}
+.planet:after{content:"";position:absolute;inset:-20px;border-radius:50%;border:1px solid #c5c0ff5c;transform:rotateX(68deg) rotateZ(-20deg);box-shadow:0 0 20px #a18aff24}
+.ring{position:absolute;width:235px;height:70px;border:1px solid #9b8aff77;border-radius:50%;transform:rotateX(68deg) rotateZ(-22deg);animation:spin 18s linear infinite}
+.ring.two{width:300px;height:100px;border-color:#65ddff38;transform:rotateX(68deg) rotateZ(38deg);animation-direction:reverse}
+@keyframes float{50%{transform:translateY(-12px) rotate(8deg)}}
+@keyframes spin{to{rotate:360deg}}
+.scroll-hint{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.18em;color:#9298ba;display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-hint span{width:1px;height:32px;background:linear-gradient(#9c8cff,transparent)}
+section.content{padding:95px 22px;max-width:1120px;margin:auto}
+.section-top{text-align:center;margin-bottom:38px}
+.kicker{color:#a69aff;text-transform:uppercase;letter-spacing:.2em;font-size:11px;font-weight:800}
+h2{font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.055em;margin:12px 0}
+.section-top p{color:var(--muted);line-height:1.7;margin:0 auto;max-width:580px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#ffffff0d,#ffffff04);min-height:190px;transition:transform .25s,border-color .25s;transform-style:preserve-3d}
+.card:hover{transform:translateY(-7px) rotateX(2deg);border-color:#a89aff80}
+.icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:#9b8aff1c;border:1px solid #9b8aff35;font-size:21px;margin-bottom:20px}
+.card h3{margin:0 0 9px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.7}
+.cta{border:1px solid var(--line);border-radius:28px;padding:45px 25px;text-align:center;background:radial-gradient(ellipse at top,#7f69ff25,transparent 70%),#ffffff05}
+footer{padding:28px 20px 38px;text-align:center;color:#7f85a9;font-size:12px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:700px){.links{display:none;position:absolute;top:60px;left:0;right:0;padding:18px;background:#0b0d20f5;border:1px solid var(--line);border-radius:14px;flex-direction:column;gap:17px}.links.open{display:flex}.menu{display:block}.cards{grid-template-columns:1fr}.card{min-height:0}.hero{padding-top:120px}.orbit-wrap{height:170px}.planet{width:94px;height:94px}.ring{width:190px}.ring.two{width:245px}.cta{padding:35px 20px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas><div class="aurora"></div>
+<nav>
+  <a class="logo" href="#home"><span class="logo-mark"></span><span>N O V A</span></a>
+  <div class="links" id="links"><a href="#home">Home</a><a href="#features">Features</a><a href="#about">About</a></div>
+  <button class="menu" id="menu" aria-label="Toggle navigation">☰ Menu</button>
+</nav>
+<main>
+  <section class="hero" id="home">
+    <div class="hero-inner" id="heroInner">
+      <div class="eyebrow"><span class="pulse"></span> A little space for big ideas</div>
+      <h1>Dream beyond<br><span class="gradient">the ordinary.</span></h1>
+      <p class="lead">A modern homepage experiment with a cosmic atmosphere, gentle motion, and a little 3D magic. Your next idea starts here.</p>
+      <div class="actions"><a class="btn primary" href="#features">Explore the experience <span>↗</span></a><a class="btn secondary" href="#about">Discover Nova</a></div>
+      <div class="orbit-wrap" aria-hidden="true"><div class="ring two"></div><div class="ring"></div><div class="planet"></div></div>
+    </div>
+    <div class="scroll-hint">SCROLL TO EXPLORE<span></span></div>
+  </section>
+  <section class="content" id="features">
+    <div class="section-top reveal"><div class="kicker">Made to explore</div><h2>A world of possibilities.</h2><p>Small details make a page feel alive. Scroll down and watch the content appear smoothly.</p></div>
+    <div class="cards">
+      <article class="card reveal"><div class="icon">✦</div><h3>Cosmic atmosphere</h3><p>Animated stars and soft aurora-like gradients create depth without distracting from the content.</p></article>
+      <article class="card reveal"><div class="icon">◉</div><h3>Depth & motion</h3><p>A floating planet, orbit rings, and subtle scroll movement bring a lightweight 3D feeling.</p></article>
+      <article class="card reveal"><div class="icon">⌘</div><h3>Made for every screen</h3><p>The layout adapts to phones, tablets, and desktop screens, with a mobile navigation menu.</p></article>
+    </div>
+  </section>
+  <section class="content" id="about">
+    <div class="cta reveal"><div class="kicker">Your first website</div><h2>Start with an idea.</h2><p class="lead">This is your starter homepage. Change the title, colours, sections, and links to make it yours.</p><div class="actions"><a class="btn primary" href="#home">Back to the top ↑</a></div></div>
+  </section>
+</main>
+<footer>© 2026 NOVA · A beginner-friendly HTML, CSS & JavaScript demo</footer>
+<script>
+const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');let stars=[],w,h,dpr;
+function resize(){dpr=Math.min(window.devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);stars=Array.from({length:Math.min(150,Math.floor(w*h/7000))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.2,a:Math.random()*.65+.15,s:Math.random()*.22+.04,p:Math.random()*6.28}))}
+function draw(){ctx.clearRect(0,0,w,h);for(const s of stars){s.p+=.012;s.y-=s.s;if(s.y<0)s.y=h;ctx.globalAlpha=s.a*(.65+.35*Math.sin(s.p));ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;requestAnimationFrame(draw)}
+resize();draw();addEventListener('resize',resize);
+const menu=document.getElementById('menu'),links=document.getElementById('links');menu.addEventListener('click',()=>links.classList.toggle('open'));links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const hero=document.getElementById('heroInner');let ticking=false;addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{hero.style.setProperty('--shift',Math.min(scrollY*.12,70)+'px');ticking=false});ticking=true}},{passive:true});
+</script>
+</body>
+</html>
